@@ -61,10 +61,10 @@ header{
 }`
 
 // writing files
-const writeFile = fileContent => {
-    
+module.exports = fileContent => {
+
     new Promise((resolve, reject) => {
-        fs.writeFile('../../createdTeamPage/index.html', fileContent, err => {
+        fs.writeFile('./dist/index.html', fileContent, err => {
             if (err) {
                 reject(err);
                 return;
@@ -78,7 +78,7 @@ const writeFile = fileContent => {
     });
 
     new Promise((resolve, reject) => {
-        fs.writeFile('../../createdTeamPage/style.css', cssSheet, err => {
+        fs.writeFile('./dist/style.css', cssSheet, err => {
             if (err) {
                 reject(err);
                 return;
@@ -91,3 +91,4 @@ const writeFile = fileContent => {
             });
     });
 };
+
