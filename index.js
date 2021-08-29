@@ -1,48 +1,65 @@
 const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern')
+const questions = require('./src/prompts');
+let teamInfo = []
 
-class Member{
-    constructor(name, category, id, email, wildcard){
-      this.name = name;
-      this.category = category;
-      this.id = id;
-      this.email = email;
-      this.wildcard = wildcard;
-    }
+const promptManager = () => {
+  console.log(`
+  ================
+  Adding a Manager
+  ================
+  `)
+  return inquirer.prompt(questions.managerQuestions)
+  .then(answer => {
+    const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+    teamInfo.push(manager);
+  })
 }
 
-class Team{
-    constructor(){
-      this.team = [];
+const promptTeamInfo = TeamInfo => {
+  return inquirer.prompt([
+    {
+      type: 'list',
+      name: 'category',
+      message: 'Would you like to add and Engineer or Intern to this project?',
+      choices: ['Engineer', 'Intern', 'Stop adding']
     }
-
-    newMember(name, category, id, email, wildcard){
-        let teamMember = new Member(name, category, id, email, wildcard);
-        this.team.push(teamMember);
+  ])
+  .then(function(decision){
+    if(decision.category == 'Stop adding') {
+     return TeamInfo
     }
-
-    get teamMemebers(){
-        return this.players;
+    else {
+      console.log(`
+      ====================
+      Adding a Team Member
+      ====================
+      `);
+      if(decision.category == 'Engineer'){
+        inquirer.prompt(questions.engineerQuestions)
+        .then(answer => {
+          const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
+          teamInfo.push(engineer)
+          return teamInfo;
+        });
+      }
+      else {
+        inquirer.prompt(questions.internQuestions)
+        .then(answer => {
+          const intern = new Engineer(answer.name, answer.id, answer.email, answer.school);
+          teamInfo.push(intern)
+          return teamInfo;
+        });
+      }
     }
-
-    get numberOfTeammates(){
-        return this.players.length;
-    }
-
-    generatePage() {
-
-    }
+  })
 }
 
-const promptMemberInfo = memberInfo => {
-    console.log(`
-  =================
-  Add a Team Member
-  =================
-  `);
-  
-if (!memberInfo.projects) {
-    memberInfo.projects = [];
-  }
-
+function init() {
+  console.log("You're about to create a team for a project")
 }
+
+init();
