@@ -36,7 +36,9 @@ const addTeamMember = (memberArray,content) => {
     return content.append(personDiv);
 }
 
+
 module.exports = templateData => {
+    console.log(templateData)
     return `<!DOCTYPE html>
     <html lang="en">
     <head>

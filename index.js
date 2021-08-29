@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-const generatePage = require('./src/page-template');
+const generatePage = require('./src/generate-file');
+const generateContent = require('./src/generate-content');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern')
@@ -49,7 +50,7 @@ const promptTeamInfo = TeamInfo => {
       else {
         inquirer.prompt(questions.internQuestions)
         .then(answer => {
-          const intern = new Engineer(answer.name, answer.id, answer.email, answer.school);
+          const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
           teamInfo.push(intern)
           return teamInfo;
         });
@@ -60,6 +61,14 @@ const promptTeamInfo = TeamInfo => {
 
 function init() {
   console.log("You're about to create a team for a project")
+  promptManager()
+  .then(promptTeamInfo)
+  .then(teamInfo => {
+    return generateContent(teamInfo);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 init();
