@@ -4,7 +4,7 @@ const generateContent = require('./src/generate-content');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern')
-const questions = require('./src/prompts');
+const {managerQuestions, engineerQuestions, internQuestions} = require('./src/prompts');
 let teamInfo = []
 
 const promptManager = () => {
@@ -13,15 +13,16 @@ const promptManager = () => {
   Adding a Manager
   ================
   `)
-  return inquirer.prompt(questions.managerQuestions)
+  return inquirer.prompt(managerQuestions)
   .then(answer => {
     const manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
     teamInfo.push(manager);
   })
 }
 
-const promptTeamInfo = TeamInfo => {
-  return inquirer.prompt([
+async function promptTeamInfo() {
+  debugger
+  inquirer.prompt([
     {
       type: 'list',
       name: 'category',
@@ -29,46 +30,45 @@ const promptTeamInfo = TeamInfo => {
       choices: ['Engineer', 'Intern', 'Stop adding']
     }
   ])
-  .then(function(decision){
-    if(decision.category == 'Stop adding') {
-     return TeamInfo
-    }
-    else {
-      console.log(`
+    .then(decision => {
+      if (decision.category == 'Stop adding') {
+        return teamInfo;
+      }
+      else {
+        console.log(`
       ====================
       Adding a Team Member
       ====================
       `);
-      if(decision.category == 'Engineer'){
-        inquirer.prompt(questions.engineerQuestions)
-        .then(answer => {
-          const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
-          teamInfo.push(engineer)
-          return teamInfo;
-        });
+        if (decision.category == 'Engineer') {
+          inquirer.prompt(engineerQuestions)
+            .then(answer => {
+              const engineer = new Engineer(answer.name, answer.id, answer.email, answer.github);
+              teamInfo.push(engineer);
+              return teamInfo;
+            });
+        }
+        else {
+          inquirer.prompt(internQuestions)
+            .then(answer => {
+              const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
+              teamInfo.push(intern);
+              return teamInfo;
+            });
+        }
       }
-      else {
-        inquirer.prompt(questions.internQuestions)
-        .then(answer => {
-          const intern = new Intern(answer.name, answer.id, answer.email, answer.school);
-          teamInfo.push(intern)
-          return teamInfo;
-        });
-      }
-    }
-  })
+    })
+    .then(
+      console.log(teamInfo));
 }
 
-function init() {
   console.log("You're about to create a team for a project")
-  promptManager()
+promptManager()
   .then(promptTeamInfo)
-  .then(teamInfo => {
-    return generateContent(teamInfo);
-  })
   .catch(err => {
     console.log(err);
   })
-}
 
-init();
+  // .then(teamInfo => {
+  //   return generateContent(teamInfo);
+  // }))

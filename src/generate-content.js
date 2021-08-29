@@ -1,6 +1,6 @@
-const addTeamMember = (memberArray,content) => {
-    let content = content||``;
-    let personDiv;
+const addTeamMember = (memberArray) => {
+    debugger;
+    console.log(memberArray);
     
     if (memberArray){
         personDiv =  `
@@ -33,7 +33,7 @@ const addTeamMember = (memberArray,content) => {
             `;
     }
 
-    return content.append(personDiv);
+    return personDiv;
 }
 
 

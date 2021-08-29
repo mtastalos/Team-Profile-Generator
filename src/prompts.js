@@ -57,7 +57,7 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "Please enter team manager's name.",
+        message: "Please enter engineer's name.",
         validate: nameInput => {
             if (nameInput) {
             return true;
@@ -112,7 +112,7 @@ const internQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "Please enter team manager's name.",
+        message: "Please enter intern's name.",
         validate: nameInput => {
             if (nameInput) {
             return true;
