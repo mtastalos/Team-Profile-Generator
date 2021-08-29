@@ -1,3 +1,6 @@
+const inquirer = require('inquirer');
+const generatePage = require('./src/page-template');
+
 class Member{
     constructor(name, category, id, email, wildcard){
       this.name = name;
@@ -27,7 +30,7 @@ class Team{
     }
 
     generatePage() {
-        
+
     }
 }
 
