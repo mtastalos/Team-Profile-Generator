@@ -31,7 +31,6 @@ header{
 .person{
     box-shadow: 3px 3px 8px grey;
     margin: 0 10px 20px 10px;
-    width: 250px;
 }
 
 .person .head-info {

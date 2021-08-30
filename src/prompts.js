@@ -151,7 +151,7 @@ const internQuestions = [
     {
         type: 'input',
         name: 'school',
-        message: "Please state the educational system you're attedning.",
+        message: "Please state the educational system you're attending.",
         validate: schoolInput => {
             if (schoolInput) {
             return true;
