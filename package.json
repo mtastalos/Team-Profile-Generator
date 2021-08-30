@@ -1,0 +1,22 @@
+{
+    "name": "Team-Profile-Generator",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+      "inquirer": "^8.1.2",
+      "jest": "^27.1.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+      "test": "jest"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/mtastalos/Team-Profile-Generator.git"
+    },
+    "author": "",
+    "license": "ISC",
+
+    "homepage": "https://github.com/Electrolion/TeamProfileGenerator#readmehttps://github.com/mtastalos/Team-Profile-Generator/blob/main/README.md"
+  }
