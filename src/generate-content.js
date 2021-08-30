@@ -1,6 +1,4 @@
 const addTeamMember = (memberArray) => {
-    console.log(memberArray[0].getRole())
-    console.log(memberArray[0].getRole()== 'Manager')
     let section = ''
     for (x=0;x<memberArray.length;x++){
         if (memberArray[x].getRole() == 'Manager'){
@@ -51,6 +49,7 @@ const addTeamMember = (memberArray) => {
         section = section + personDiv
     }
     
+    console.log('Your files have been generated! View them in the Dist folder.')
     return section;
 }
 

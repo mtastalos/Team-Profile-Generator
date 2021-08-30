@@ -12,8 +12,8 @@ Practice using Object Oriented Programming.
 * Node
 * Jest
 
-## Reference Image
- ![](assets/images/ref.JPG)
+## Reference Video
+ https://www.youtube.com/watch?v=Ltc7Yw5a9y0
 
  ## Contribution
  Made By Michael Astalos 
